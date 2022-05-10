@@ -54,6 +54,29 @@ namespace DecisionTree
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public void Prune(DataSet signal, DataSet background)
+        {
+            int numberOfAlphaChunks = 10;
+            double smallestValue = 1e20;
+            double testAlpha;
+            double bestAlpha = 0;
+            for(int i = 0; i < numberOfAlphaChunks; i++)
+            {
+                testAlpha = 1 / 10.0 * i;
+                int numNodes = headnode.Prune(signal, background, testAlpha);
+                double currentError = headnode.findError(signal, background) + testAlpha * numNodes;
+                if(currentError<smallestValue);
+                {
+                    bestAlpha = testAlpha;
+                }
+                headnode.resetHidden();
+            }
+            headnode.Prune(signal, background, bestAlpha);
+        }
+
+        /// <summary>
         /// Calculates the value for a single DataPoint
         /// Assumes the tree is trained already
         /// </summary>

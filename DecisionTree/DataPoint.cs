@@ -15,11 +15,13 @@ namespace DecisionTree
     {
         // An array of doubles, representing the relevant variables for the event
         public double[] Variables { get; set; }
+        public double Weight { get; set; }
 
         /// <param name="nvar">The number of different variables in the point</param>
-        public DataPoint(int nvar)
+        public DataPoint(int nvar, double weight = 1)
         {
             Variables = new double[nvar];
+            this.Weight = weight;
         }
     }
 }
